@@ -1,0 +1,67 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-Italic.ttf");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto/Roboto-BoldItalic.ttf");
+    font-style: italic;
+    font-weight: bold;
+}
+
+html {
+    overflow-y: scroll;
+    background: #f0f0f0;
+    min-width: 1000px;
+    color: #414550;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 64px;
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.content {
+    box-sizing: border-box;
+    position: relative;
+    padding: 10px 20px 0 320px;
+}
+
+.change-language-wrapper {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    background-color: #fff;
+}
+
+.change-language-wrapper span {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.change-language-wrapper .active {
+    cursor: default;
+    font-weight: bold;
+}
