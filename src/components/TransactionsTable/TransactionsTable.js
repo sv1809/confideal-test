@@ -8,7 +8,7 @@ const TransactionsTable = ({ transactions, rate, deleteTransaction }) => (<table
             <th>Дата</th>
             <th>Заказчик</th>
             <th>Исполнитель</th>
-            <th>Сумма</th>
+            <th>Сумма сделки</th>
             <th>Комиссия</th>
             <th>Сумма к оплате</th>
             <th>Сумма к получению</th>

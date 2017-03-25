@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 
 import Header from "../../components/Header";
 import AddTransactionWindow from "../../components/AddTransactionWindow";
-import { addTransaction, deleteTransaction } from "../../actions/transactionActions";
+import { addTransaction, deleteTransaction, applyFilter, sortTransactions } from "../../actions/transactionActions";
 import { getRate, subscribeToRate } from "../../actions/rateActions";
 import TransactionFilter from "../../components/TransactionFilter";
 import TransactionsTable from "../../components/TransactionsTable";
-import transactionFilter from "../../utils/transactionFilter";
+import TransactionSort from "../../components/TransactionSort";
+import * as transactionsUtils from "../../utils/transactionsUtils";
 
 import styles from "./Profile.module.css";
 
@@ -18,6 +19,8 @@ class Profile extends React.Component {
         getRate: PropTypes.func.isRequired,
         subscribeToRate: PropTypes.func.isRequired,
         deleteTransaction: PropTypes.func.isRequired,
+        applyFilter: PropTypes.func.isRequired,
+        sortTransactions: PropTypes.func.isRequired,
         transactions: PropTypes.arrayOf(
             PropTypes.shape({
                 date: PropTypes.string.isRequired,
@@ -37,7 +40,6 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             addTransactionVisible: false,
-            filter: null
         };
     }
 
@@ -57,13 +59,14 @@ class Profile extends React.Component {
     })
 
     render() {
-        const { transactions, rate, deleteTransaction } = this.props;
-        const { filter, addTransactionVisible } = this.state;
+        const { transactions, rate, deleteTransaction, applyFilter, sortTransactions } = this.props;
+        const { addTransactionVisible } = this.state;
         return (<div>
             <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} rate={rate} />
             <div className={styles.body}>
-                <TransactionFilter applyFilter={filter => this.setState({ ...this.state, filter })} />
-                <TransactionsTable transactions={transactions.filter(transactionFilter(filter, rate))} rate={rate} deleteTransaction={deleteTransaction} />
+                <TransactionFilter applyFilter={filter => applyFilter(filter)} />
+                <TransactionSort sort={params => sortTransactions(params)} />
+                <TransactionsTable transactions={transactions} rate={rate} deleteTransaction={deleteTransaction} />
             </div>
             {addTransactionVisible && <AddTransactionWindow onClose={() => this.setTransactionWindowVisibility(false)} addTransaction={this.props.addTransaction} rate={rate} />}
         </div>);
@@ -75,9 +78,21 @@ const mapDispatchToProps = dispatch => ({
     getRate: () => dispatch(getRate()),
     subscribeToRate: () => dispatch(subscribeToRate()),
     deleteTransaction: id => dispatch(deleteTransaction(id)),
+    applyFilter: filter => dispatch(applyFilter(filter)),
+    sortTransactions: sorting => dispatch(sortTransactions(sorting)),
 });
 
+const mapStateToProps = state => {
+    const { transactions, filter, sorting } = state.transactions;
+    return {
+        transactions: transactions.filter(transactionsUtils.filter(filter, state.usdEthRate)).sort(transactionsUtils.sort(sorting)),
+        filter,
+        sorting,
+        rate: state.usdEthRate
+    };
+};
+
 export default connect(
-    state => ({ transactions: state.transactions, rate: state.usdEthRate }),
+    mapStateToProps,
     mapDispatchToProps
 )(Profile);

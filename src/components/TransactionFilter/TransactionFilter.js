@@ -14,6 +14,20 @@ const initialState = {
     amountEnd: "",
     isUsd: false
 };
+const getInitialState = props => {
+    if (props) {
+        return {
+            dateStart: props.dateStart || "",
+            dateEnd: props.dateEnd || "",
+            customer: props.customer || "",
+            contractor: props.contractor || "",
+            amountStart: props.amountStart || "",
+            amountEnd: props.amountEnd || "",
+            isUsd: props.isUsd || false
+        };
+    }
+    return initialState;
+};
 
 export default class TransactionFilter extends React.Component {
 
@@ -23,7 +37,7 @@ export default class TransactionFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = initialState;
+        this.state = getInitialState(props);
     }
 
     updateProp = (name, value) => {
