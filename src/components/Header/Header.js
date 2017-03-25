@@ -7,7 +7,7 @@ const Header = ({ rate, showAddTransaction }) => (<header className={styles.head
     <div className={styles.title}>Личный кабинет</div>
     <div>
         <span className={styles.rate}>USD/ETH: {rate || "-"}</span>
-        <PrimaryButton text="Добавить операцию" onClick={showAddTransaction} />
+        <PrimaryButton text="Новая сделка" onClick={showAddTransaction} />
     </div>
 </header>);
 

@@ -73,7 +73,7 @@ export default class AddTransactionWindow extends React.Component {
                 </div>
                 <footer className={styles.footer}>
                     <SecondaryButton text="Отмена" onClick={onClose} className={styles.cancelButton + " " + styles.button} />
-                    <PrimaryButton text="Создать" onClick={this.addTransaction} className={styles.button} />
+                    <PrimaryButton text="Добавить" onClick={this.addTransaction} className={styles.button} />
                 </footer>
             </div>
         </div>);
