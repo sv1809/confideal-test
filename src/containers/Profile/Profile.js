@@ -6,54 +6,31 @@ import AddTransactionWindow from "../../components/AddTransactionWindow";
 import { addTransaction, deleteTransaction } from "../../actions/transactionActions";
 import { getRate, subscribeToRate } from "../../actions/rateActions";
 import TransactionFilter from "../../components/TransactionFilter";
+import TransactionsTable from "../../components/TransactionsTable";
+import transactionFilter from "../../utils/transactionFilter";
 
 import styles from "./Profile.module.css";
 
-// amountStart: "",
-//     amountEnd: "",
-//         isUsd: false
-const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n);
-
-const transactionFilter = (filter, rate) => transaction => {
-    if (filter == null) {
-        return true;
-    }
-    if (filter.dateStart != null && new Date(filter.dateStart) > new Date(transaction.date)) {
-        return false;
-    }
-    if (filter.dateEnd != null && new Date(filter.dateEnd) < new Date(transaction.date)) {
-        return false;
-    }
-    if (filter.customer != null && transaction.customer.indexOf(filter.customer) === -1) {
-        return false;
-    }
-    if (filter.contractor != null && transaction.contractor.indexOf(filter.contractor) === -1) {
-        return false;
-    }
-    if (filter.amountStart != null && isNumeric(filter.amountStart)) {
-        if (filter.isUsd) {
-            if (transaction.amount * rate < filter.amountStart) {
-                return false;
-            }
-        } else if (transaction.amount < filter.amountStart) {
-            return false;
-        }
-    }
-    if (filter.amountEnd != null && isNumeric(filter.amountEnd)) {
-        if (filter.isUsd) {
-            if (transaction.amount * rate > filter.amountEnd) {
-                return false;
-            }
-        } else if (transaction.amount > filter.amountEnd) {
-            return false;
-        }
-    }
-    return true;
-};
-
 class Profile extends React.Component {
-    static propTypes = {
 
+    static propTypes = {
+        addTransaction: PropTypes.func.isRequired,
+        getRate: PropTypes.func.isRequired,
+        subscribeToRate: PropTypes.func.isRequired,
+        deleteTransaction: PropTypes.func.isRequired,
+        transactions: PropTypes.arrayOf(
+            PropTypes.shape({
+                date: PropTypes.string.isRequired,
+                customer: PropTypes.string.isRequired,
+                contractor: PropTypes.string.isRequired,
+                amount: PropTypes.number.isRequired,
+                fee: PropTypes.number.isRequired,
+                paymentAmount: PropTypes.number.isRequired,
+                receivingAmount: PropTypes.number.isRequired,
+                id: PropTypes.string.isRequired,
+            })
+        ).isRequired,
+        rate: PropTypes.number,
     }
 
     constructor(props) {
@@ -80,38 +57,13 @@ class Profile extends React.Component {
     })
 
     render() {
-        const { transactions, rate } = this.props;
+        const { transactions, rate, deleteTransaction } = this.props;
         const { filter, addTransactionVisible } = this.state;
         return (<div>
             <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} rate={rate} />
             <div className={styles.body}>
                 <TransactionFilter applyFilter={filter => this.setState({ ...this.state, filter })} />
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Заказчик</th>
-                            <th>Исполнитель</th>
-                            <th>Сумма</th>
-                            <th>Комиссия</th>
-                            <th>Сумма к оплате</th>
-                            <th>Сумма к получению</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {transactions.filter(transactionFilter(filter, rate)).map(item => (<tr key={item.id} >
-                            <td>{item.date}</td>
-                            <td>{item.customer}</td>
-                            <td>{item.contractor}</td>
-                            <td>{item.amount} ETH({item.amount * rate} USD)</td>
-                            <td>{item.fee} ETH({item.fee * rate} USD)</td>
-                            <td>{item.paymentAmount} ETH({item.paymentAmount * rate} USD)</td>
-                            <td>{item.receivingAmount} ETH({item.receivingAmount * rate} USD)</td>
-                            <td><span className={styles.deleteBtn} onClick={() => this.props.deleteTransaction(item.id)}>Удалить</span></td>
-                        </tr>))}
-                    </tbody>
-                </table>
+                <TransactionsTable transactions={transactions.filter(transactionFilter(filter, rate))} rate={rate} deleteTransaction={deleteTransaction} />
             </div>
             {addTransactionVisible && <AddTransactionWindow onClose={() => this.setTransactionWindowVisibility(false)} addTransaction={this.props.addTransaction} rate={rate} />}
         </div>);

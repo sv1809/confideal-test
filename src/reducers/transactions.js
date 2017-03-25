@@ -27,7 +27,7 @@ const mock = [{
     fee: 1,
     paymentAmount: 123,
     receivingAmount: 120,
-    id: 1,
+    id: "1",
 }, {
     date: "2017-03-24",
     customer: "customer2",
@@ -37,7 +37,7 @@ const mock = [{
     fee: 2,
     paymentAmount: 34,
     receivingAmount: 32,
-    id: 2,
+    id: "2",
 }, {
     date: "2017-02-25",
     customer: "customer3",
@@ -47,7 +47,7 @@ const mock = [{
     fee: 1,
     paymentAmount: 132,
     receivingAmount: 312,
-    id: 3,
+    id: "3",
 }, {
     date: "2017-01-25",
     customer: "customer4",
@@ -57,7 +57,7 @@ const mock = [{
     fee: 5,
     paymentAmount: 123,
     receivingAmount: 1,
-    id: 4,
+    id: "4",
 }, {
     date: "2017-03-30",
     customer: "customer5",
@@ -67,5 +67,5 @@ const mock = [{
     fee: 2314,
     paymentAmount: 2,
     receivingAmount: 3,
-    id: 5,
+    id: "5",
 }];
