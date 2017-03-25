@@ -47,8 +47,13 @@ export default class AddTransactionWindow extends React.Component {
         this.setState(newState);
     }
 
+    addTransaction = () => {
+        this.props.addTransaction(this.state);
+        this.props.onClose();
+    }
+
     render() {
-        const { addTransaction, onClose, rate } = this.props;
+        const { onClose, rate } = this.props;
         const { date, customer, contractor, amount, isContractorPayFee, fee, paymentAmount, receivingAmount } = this.state;
         return (<div>
             <div className={styles.base} onClick={onClose} />
@@ -64,7 +69,7 @@ export default class AddTransactionWindow extends React.Component {
                 </div>
                 <footer className={styles.footer}>
                     <SecondaryButton text="Отмена" onClick={onClose} className={styles.cancelButton + " " + styles.button} />
-                    <PrimaryButton text="Создать" onClick={addTransaction} className={styles.button} />
+                    <PrimaryButton text="Создать" onClick={this.addTransaction} className={styles.button} />
                 </footer>
             </div>
         </div>);
