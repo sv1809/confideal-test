@@ -68,7 +68,7 @@ export default class AddTransactionWindow extends React.Component {
                     <LabelInput caption="Имя заказчика" value={customer} onChange={e => this.updateProp("customer", e.target.value)} />
                     <LabelInput caption="Имя исполнителя" value={contractor} onChange={e => this.updateProp("contractor", e.target.value)} />
                     <LabelInput caption="Сумма сделки(ETH)" value={amount} onChange={e => this.updateProp("amount", +e.target.value)} type="number" />
-                    <span className={styles.feeInfo}>Комиссия: <b>{fee}</b> ETH({fee * rate} USD). Сумма к оплате: <b>{paymentAmount}</b> ETH({paymentAmount * rate} USD). Сумма к получению: <b>{receivingAmount}</b> ETH({receivingAmount * rate} USD).</span>
+                    <span className={styles.feeInfo}>Сумма сделки: <b>{amount}</b> ETH({amount * rate} USD). Комиссия: <b>{fee}</b> ETH({fee * rate} USD). Сумма к оплате: <b>{paymentAmount}</b> ETH({paymentAmount * rate} USD). Сумма к получению: <b>{receivingAmount}</b> ETH({receivingAmount * rate} USD).</span>
                     <LabelInput caption="Комиссию оплачивает исполнитель" value={isContractorPayFee} onChange={e => this.updateProp("isContractorPayFee", e.target.checked)} type="checkbox" />
                 </div>
                 <footer className={styles.footer}>

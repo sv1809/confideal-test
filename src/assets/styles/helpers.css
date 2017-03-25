@@ -1,0 +1,25 @@
+:root {
+    --input: {
+        border-radius: 2px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #dadada;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+    --input-focus: {
+        outline: none;
+        border-color: #07abe8;
+        box-shadow: #07abe8;
+    }
+    --button: {
+        outline: none;
+        border: none;
+        color: #fff;
+        border-radius: 2px;
+        padding: 5px 10px;
+        font-size: .8em;
+        cursor: pointer;
+    }
+}

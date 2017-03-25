@@ -19,7 +19,7 @@ export default (state = mock, action) => {
 };
 
 const mock = [{
-    date: new Date().toJSON().slice(0, 10),
+    date: "2017-03-25",
     customer: "customer1",
     contractor: "contractor1",
     amount: 120,
@@ -29,7 +29,7 @@ const mock = [{
     receivingAmount: 120,
     id: 1,
 }, {
-    date: new Date().toJSON().slice(0, 10),
+    date: "2017-03-24",
     customer: "customer2",
     contractor: "contractor2",
     amount: 312,
@@ -39,7 +39,7 @@ const mock = [{
     receivingAmount: 32,
     id: 2,
 }, {
-    date: new Date().toJSON().slice(0, 10),
+    date: "2017-02-25",
     customer: "customer3",
     contractor: "contractor3",
     amount: 213,
@@ -49,7 +49,7 @@ const mock = [{
     receivingAmount: 312,
     id: 3,
 }, {
-    date: new Date().toJSON().slice(0, 10),
+    date: "2017-01-25",
     customer: "customer4",
     contractor: "contractor4",
     amount: 5464,
@@ -59,7 +59,7 @@ const mock = [{
     receivingAmount: 1,
     id: 4,
 }, {
-    date: new Date().toJSON().slice(0, 10),
+    date: "2017-03-30",
     customer: "customer5",
     contractor: "contractor5",
     amount: 234213,

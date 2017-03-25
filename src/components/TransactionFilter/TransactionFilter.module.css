@@ -1,0 +1,55 @@
+@import "../../assets/styles/helpers.css";
+.filter {
+    border: 1px solid #dadada;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.header {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.condition {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.conditionLabel {
+    width: 200px;
+}
+
+.additionalCondition {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    @apply --input;
+}
+
+.input:focus {
+    @apply --input-focus;
+}
+
+.separator {
+    margin: 0 5px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cancelButton {
+    margin-right: 10px;
+}
+
+.button {
+    width: 100px;
+    height: 30px;
+}

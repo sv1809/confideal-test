@@ -1,11 +1,6 @@
 @import "../../assets/styles/colors.css";
+@import "../../assets/styles/helpers.css";
 .button {
+    @apply --button;
     background-color: var(--primary-button-color);
-    outline: none;
-    border: none;
-    color: #fff;
-    border-radius: 2px;
-    padding: 5px 10px;
-    font-size: .8em;
-    cursor: pointer;
 }
