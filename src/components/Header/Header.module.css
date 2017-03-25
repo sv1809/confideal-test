@@ -1,0 +1,19 @@
+@import "../../assets/styles/colors.css";
+.header {
+    background-color: var(--header-color);
+    color: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
+}
+
+.title {
+    font-size: 1.2em;
+}
+
+.rate {
+    margin-right: 10px;
+}

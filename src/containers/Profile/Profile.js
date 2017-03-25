@@ -1,7 +1,33 @@
 import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 
-const Profile = () => (<div>Profile</div>);
+import Header from "../../components/Header";
+import AddTransactionWindow from "../../components/AddTransactionWindow";
+
+class Profile extends React.Component {
+    static propTypes = {
+
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            addTransactionVisible: false,
+        };
+    }
+
+    setTransactionWindowVisibility = value => this.setState({
+        ...this.state,
+        addTransactionVisible: value,
+    })
+
+    render() {
+        return (<div>
+            <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} />
+            {this.state.addTransactionVisible && <AddTransactionWindow onClose={() => this.setTransactionWindowVisibility(false)} addTransaction={() => { }} />}
+        </div>);
+    }
+}
 
 export default connect(
     state => ({}),
