@@ -6,7 +6,7 @@ import PrimaryButton from "../PrimaryButton";
 const Header = ({ rate, showAddTransaction }) => (<header className={styles.header}>
     <div className={styles.title}>Личный кабинет</div>
     <div>
-        <span className={styles.rate}>USD/ETH {rate || "..."}</span>
+        <span className={styles.rate}>USD/ETH: {rate || "-"}</span>
         <PrimaryButton text="Добавить операцию" onClick={showAddTransaction} />
     </div>
 </header>);

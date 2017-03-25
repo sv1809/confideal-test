@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Header from "../../components/Header";
 import AddTransactionWindow from "../../components/AddTransactionWindow";
 import { addTransaction } from "../../actions/transactionActions";
+import { getRate, subscribeToRate } from "../../actions/rateActions";
 
 import styles from "./Profile.module.css";
 
@@ -19,6 +20,16 @@ class Profile extends React.Component {
         };
     }
 
+    componentWillMount = () => {
+        this.props.getRate();
+    }
+
+    componentWillReceiveProps = next => {
+        if (this.props.rate == null && next.rate != null) {
+            this.props.subscribeToRate();
+        }
+    }
+
     setTransactionWindowVisibility = value => this.setState({
         ...this.state,
         addTransactionVisible: value,
@@ -27,7 +38,7 @@ class Profile extends React.Component {
     render() {
         const { transactions, rate } = this.props;
         return (<div>
-            <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} />
+            <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} rate={rate} />
             <div className={styles.body}>
                 <table className={styles.table}>
                     <thead>
@@ -61,9 +72,11 @@ class Profile extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
     addTransaction: transaction => dispatch(addTransaction(transaction)),
+    getRate: () => dispatch(getRate()),
+    subscribeToRate: () => dispatch(subscribeToRate()),
 });
 
 export default connect(
-    state => ({ transactions: state.transactions, rate: state.rates.USD_ETH }),
+    state => ({ transactions: state.transactions, rate: state.usdEthRate }),
     mapDispatchToProps
 )(Profile);

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import rates from "./exchangeRates";
+import usdEthRate from "./usdEthRate";
 import transactions from "./transactions";
 
 export default combineReducers({
-    rates,
+    usdEthRate,
     transactions,
 });

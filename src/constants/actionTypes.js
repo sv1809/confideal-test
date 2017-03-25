@@ -1,2 +1,3 @@
 export const UPDATE_RATE = "UPDATE_RATE";
+export const SUBSCRIBE_TO_RATE = "SUBSCRIBE_TO_RATE";
 export const ADD_TRANSACTION = "ADD_TRANSACTION";
