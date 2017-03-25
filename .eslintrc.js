@@ -14,9 +14,6 @@ module.exports = {
         },
         "sourceType": "module"
     },
-    "globals": {
-        "React": true,
-    },
     "plugins": [
         "react"
     ],

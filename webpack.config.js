@@ -28,9 +28,6 @@ const plugins = [
         production: isProd,
         inject: true,
     }),
-    new webpack.ProvidePlugin({
-        React: "react",
-    }),
 ];
 
 const jsEntry = [
