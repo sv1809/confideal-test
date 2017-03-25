@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Header from "../../components/Header";
 import AddTransactionWindow from "../../components/AddTransactionWindow";
-import { addTransaction } from "../../actions/transactionActions";
+import { addTransaction, deleteTransaction } from "../../actions/transactionActions";
 import { getRate, subscribeToRate } from "../../actions/rateActions";
 
 import styles from "./Profile.module.css";
@@ -50,10 +50,11 @@ class Profile extends React.Component {
                             <th>Комиссия</th>
                             <th>Сумма к оплате</th>
                             <th>Сумма к получению</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {transactions.map((item, index) => (<tr key={index} >
+                        {transactions.map(item => (<tr key={item.id} >
                             <td>{item.date}</td>
                             <td>{item.customer}</td>
                             <td>{item.contractor}</td>
@@ -61,6 +62,7 @@ class Profile extends React.Component {
                             <td>{item.fee} ETH({item.fee * rate} USD)</td>
                             <td>{item.paymentAmount} ETH({item.paymentAmount * rate} USD)</td>
                             <td>{item.receivingAmount} ETH({item.receivingAmount * rate} USD)</td>
+                            <td><span className={styles.deleteBtn} onClick={() => this.props.deleteTransaction(item.id)}>Удалить</span></td>
                         </tr>))}
                     </tbody>
                 </table>
@@ -74,6 +76,7 @@ const mapDispatchToProps = dispatch => ({
     addTransaction: transaction => dispatch(addTransaction(transaction)),
     getRate: () => dispatch(getRate()),
     subscribeToRate: () => dispatch(subscribeToRate()),
+    deleteTransaction: id => dispatch(deleteTransaction(id)),
 });
 
 export default connect(

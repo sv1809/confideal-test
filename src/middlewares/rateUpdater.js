@@ -7,8 +7,10 @@ const wsuri = "wss://api.poloniex.com";
 let connection = null;
 
 const onConnectionOpen = store => session => {
+    let prevValue = null;
     session.subscribe("ticker", args => {
-        if (args[0] === "USDT_ETH") {
+        if (args[0] === "USDT_ETH" && args[1] !== prevValue) {
+            prevValue = args[1];
             store.dispatch(updateRate(args[1]));
         }
     });

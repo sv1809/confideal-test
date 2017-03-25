@@ -1,4 +1,4 @@
-import { ADD_TRANSACTION } from "../constants/actionTypes";
+import { ADD_TRANSACTION, DELETE_TRANSACTION } from "../constants/actionTypes";
 
 export default (state = mock, action) => {
     switch (action.type) {
@@ -6,6 +6,12 @@ export default (state = mock, action) => {
             return [
                 ...state,
                 action.transaction
+            ];
+        case DELETE_TRANSACTION:
+            const ind = state.findIndex(item => item.id === action.id);
+            return [
+                ...state.slice(0, ind),
+                ...state.slice(ind + 1)
             ];
         default:
             return state;
@@ -21,6 +27,7 @@ const mock = [{
     fee: 1,
     paymentAmount: 123,
     receivingAmount: 120,
+    id: 1,
 }, {
     date: new Date().toJSON().slice(0, 10),
     customer: "customer2",
@@ -30,6 +37,7 @@ const mock = [{
     fee: 2,
     paymentAmount: 34,
     receivingAmount: 32,
+    id: 2,
 }, {
     date: new Date().toJSON().slice(0, 10),
     customer: "customer3",
@@ -39,6 +47,7 @@ const mock = [{
     fee: 1,
     paymentAmount: 132,
     receivingAmount: 312,
+    id: 3,
 }, {
     date: new Date().toJSON().slice(0, 10),
     customer: "customer4",
@@ -48,6 +57,7 @@ const mock = [{
     fee: 5,
     paymentAmount: 123,
     receivingAmount: 1,
+    id: 4,
 }, {
     date: new Date().toJSON().slice(0, 10),
     customer: "customer5",
@@ -57,4 +67,5 @@ const mock = [{
     fee: 2314,
     paymentAmount: 2,
     receivingAmount: 3,
+    id: 5,
 }];

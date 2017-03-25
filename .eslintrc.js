@@ -47,6 +47,9 @@ module.exports = {
         ],
         "no-console": [
             1
+        ],
+        "no-case-declarations": [
+            0
         ]
     }
 };

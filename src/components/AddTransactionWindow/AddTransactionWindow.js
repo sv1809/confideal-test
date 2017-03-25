@@ -1,4 +1,5 @@
 import React, { PropTypes } from "react";
+import uuidV4 from "uuid/v4";
 
 import PrimaryButton from "../PrimaryButton";
 import SecondaryButton from "../SecondaryButton";
@@ -48,7 +49,10 @@ export default class AddTransactionWindow extends React.Component {
     }
 
     addTransaction = () => {
-        this.props.addTransaction(this.state);
+        this.props.addTransaction({
+            ...this.state,
+            id: uuidV4(),
+        });
         this.props.onClose();
     }
 
