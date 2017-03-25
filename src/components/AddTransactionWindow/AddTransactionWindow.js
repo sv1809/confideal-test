@@ -10,7 +10,8 @@ export default class AddTransactionWindow extends React.Component {
 
     static propTypes = {
         addTransaction: PropTypes.func.isRequired,
-        onClose: PropTypes.func.isRequired
+        onClose: PropTypes.func.isRequired,
+        rate: PropTypes.number.isRequired,
     }
 
     constructor(props) {
@@ -22,22 +23,44 @@ export default class AddTransactionWindow extends React.Component {
             amount: 0,
             isContractorPayFee: false,
             fee: 0,
+            paymentAmount: 0,
+            receivingAmount: 0,
         };
     }
 
+    updateProp = (name, value) => {
+        const newState = { ...this.state };
+        newState[name] = value;
+        if (newState.amount !== this.state.amount) {
+            let fee = newState.amount * 0.015;
+            if (fee < 0.3) {
+                fee = 0.3;
+            } else if (fee > 5) {
+                fee = 5;
+            }
+            newState.fee = fee;
+        }
+        if (newState.amount !== this.state.amount || newState.isContractorPayFee !== this.state.isContractorPayFee) {
+            newState.paymentAmount = newState.isContractorPayFee ? newState.amount : newState.amount + newState.fee;
+            newState.receivingAmount = !newState.isContractorPayFee ? newState.amount : newState.amount - newState.fee;
+        }
+        this.setState(newState);
+    }
+
     render() {
-        const { addTransaction, onClose } = this.props;
-        const { date, customer, contractor, amount, isContractorPayFee, fee } = this.state;
+        const { addTransaction, onClose, rate } = this.props;
+        const { date, customer, contractor, amount, isContractorPayFee, fee, paymentAmount, receivingAmount } = this.state;
         return (<div>
             <div className={styles.base} onClick={onClose} />
             <div className={styles.window}>
                 <header className={styles.header}>Новая сделка</header>
                 <div className={styles.body}>
-                    <LabelInput caption="Дата" value={date} onChange={() => { }} type="date" />
-                    <LabelInput caption="Имя заказчика" value={customer} onChange={() => { }} />
-                    <LabelInput caption="Имя исполнителя" value={customer} onChange={() => { }} />
-                    <LabelInput caption="Сумма сделки(ETH)" value={amount} onChange={() => { }} type="number" />
-                    <LabelInput caption="Комиссию оплачивает исполнитель" value={amount} onChange={() => { }} type="checkbox" />
+                    <LabelInput caption="Дата" value={date} onChange={e => this.updateProp("date", e.target.value)} type="date" />
+                    <LabelInput caption="Имя заказчика" value={customer} onChange={e => this.updateProp("customer", e.target.value)} />
+                    <LabelInput caption="Имя исполнителя" value={contractor} onChange={e => this.updateProp("contractor", e.target.value)} />
+                    <LabelInput caption="Сумма сделки(ETH)" value={amount} onChange={e => this.updateProp("amount", +e.target.value)} type="number" />
+                    <span className={styles.feeInfo}>Комиссия: <b>{fee}</b> ETH({fee * rate} USD). Сумма к оплате: <b>{paymentAmount}</b> ETH({paymentAmount * rate} USD). Сумма к получению: <b>{receivingAmount}</b> ETH({receivingAmount * rate} USD).</span>
+                    <LabelInput caption="Комиссию оплачивает исполнитель" value={isContractorPayFee} onChange={e => this.updateProp("isContractorPayFee", e.target.checked)} type="checkbox" />
                 </div>
                 <footer className={styles.footer}>
                     <SecondaryButton text="Отмена" onClick={onClose} className={styles.cancelButton + " " + styles.button} />

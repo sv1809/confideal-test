@@ -7,7 +7,7 @@ const LabelInput = ({ caption, value, onChange, type }) => {
     const id = uuidV4();
     return (<div className={styles.captionInput}>
         <label className={styles.caption} htmlFor={id}>{caption}</label>
-        <input className={styles.input} value={value} onChange={onChange} type={type || "text"} id={id} />
+        <input className={styles.input} value={value} onChange={onChange} type={type || "text"} id={id} checked={value} />
     </div>);
 };
 

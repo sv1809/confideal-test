@@ -24,7 +24,7 @@ class Profile extends React.Component {
     render() {
         return (<div>
             <Header showAddTransaction={() => this.setTransactionWindowVisibility(true)} />
-            {this.state.addTransactionVisible && <AddTransactionWindow onClose={() => this.setTransactionWindowVisibility(false)} addTransaction={() => { }} />}
+            {this.state.addTransactionVisible && <AddTransactionWindow onClose={() => this.setTransactionWindowVisibility(false)} addTransaction={() => { }} rate={30} />}
         </div>);
     }
 }
