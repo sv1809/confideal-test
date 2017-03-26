@@ -24,10 +24,9 @@ describe("components", () => {
 
         it("should render self", () => {
             const { props, enzymeWrapper } = setup();
-
             expect(enzymeWrapper.hasClass("table")).toBe(true);
-            expect(enzymeWrapper.hasClass("thead")).not.toBe(null);
-            expect(enzymeWrapper.hasClass("tbody")).not.toBe(null);
+            expect(enzymeWrapper.find("thead").length).toBe(1);
+            expect(enzymeWrapper.find("tbody").length).toBe(1);
             expect(enzymeWrapper.find("th").length).toBe(8);
             expect(enzymeWrapper.find("tr").length).toBe(transactions.length + 1);
             const firstDataTr = enzymeWrapper.find("tr").at(1);
@@ -46,7 +45,7 @@ describe("components", () => {
             expect(delteButtonProps.onClick).not.toBe(null);
         });
 
-        it("should call deleteTransaction on delte button click", () => {
+        it("should call deleteTransaction on delete button click", () => {
             const { enzymeWrapper, props } = setup();
             const firstDataTr = enzymeWrapper.find("tr").at(1);
             const firstTransactionTds = firstDataTr.find("td");

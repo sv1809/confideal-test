@@ -70,7 +70,7 @@ export default class TransactionFilter extends React.Component {
                     <input className={styles.input} value={customer} onChange={e => this.updateProp("customer", e.target.value)} />
                 </div>
                 <div className={styles.condition}>
-                    <label className={styles.conditionLabel}>Имя Исполнителя</label>
+                    <label className={styles.conditionLabel}>Имя исполнителя</label>
                     <input className={styles.input} value={contractor} onChange={e => this.updateProp("contractor", e.target.value)} />
                 </div>
                 <div className={styles.condition}>
