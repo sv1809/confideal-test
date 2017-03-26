@@ -12,7 +12,7 @@ import * as transactionsUtils from "../../utils/transactionsUtils";
 
 import styles from "./Profile.module.css";
 
-class Profile extends React.Component {
+export class Profile extends React.Component {
 
     static propTypes = {
         addTransaction: PropTypes.func.isRequired,
@@ -34,6 +34,11 @@ class Profile extends React.Component {
             })
         ).isRequired,
         rate: PropTypes.number,
+        filer: PropTypes.shape({
+        }),
+        sorting: PropTypes.shape({
+
+        }),
     }
 
     constructor(props) {
