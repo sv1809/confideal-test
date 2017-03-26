@@ -41,22 +41,13 @@ export const filter = (filter, rate) => transaction => {
 
 export const sort = sorting => (a, b) => {
     if (sorting == null) return 0;
-    if (sorting.field === "customer" || sorting.field === "contractor" || sorting.field === "date") {
-        if (sorting.direction === sortDirections.ASCENDING) {
-            if (a[sorting.field] < b[sorting.field]) return -1;
-            if (a[sorting.field] > b[sorting.field]) return 1;
-            return 0;
-        } else {
-            if (a[sorting.field] < b[sorting.field]) return 1;
-            if (a[sorting.field] > b[sorting.field]) return -1;
-            return 0;
-        }
-    }
-    if (sorting.field === "amount" || sorting.field === "fee" || sorting.field === "paymentAmount" || sorting.field === "receivingAmount") {
-        if (sorting.direction === sortDirections.ASCENDING) {
-            return a[sorting.field] - b[sorting.field];
-        } else {
-            return b[sorting.field] - a[sorting.field];
-        }
+    if (sorting.direction === sortDirections.ASCENDING) {
+        if (a[sorting.field] < b[sorting.field]) return -1;
+        if (a[sorting.field] > b[sorting.field]) return 1;
+        return 0;
+    } else {
+        if (a[sorting.field] < b[sorting.field]) return 1;
+        if (a[sorting.field] > b[sorting.field]) return -1;
+        return 0;
     }
 };
