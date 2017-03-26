@@ -34,8 +34,8 @@ describe("components", () => {
             dateEnd: "2017-03-26",
             customer: "customer",
             contractor: "contractor",
-            amountStart: "10",
-            amountEnd: "30",
+            amountStart: 10,
+            amountEnd: 30,
             isUsd: true
         };
 
@@ -93,7 +93,14 @@ describe("components", () => {
             amountCondition.find(".input").at(0).props().onChange({ target: { value: expectedState.amountStart } });
             amountCondition.find(".input").at(1).props().onChange({ target: { value: expectedState.amountEnd } });
             amountCondition.find(".additionalCondition").find(".input").props().onChange({ target: { checked: expectedState.isUsd } });
-            expect(enzymeWrapper.state(), expectedState);
+            const { dateStart, dateEnd, customer, contractor, amountStart, amountEnd, isUsd } = enzymeWrapper.state();
+            expect(dateStart).toBe(expectedState.dateStart);
+            expect(dateEnd).toBe(expectedState.dateEnd);
+            expect(customer).toBe(expectedState.customer);
+            expect(contractor).toBe(expectedState.contractor);
+            expect(amountStart).toBe(expectedState.amountStart);
+            expect(amountEnd).toBe(expectedState.amountEnd);
+            expect(isUsd).toBe(expectedState.isUsd);
         });
 
         it("should clear filter and call applyFilter", () => {
@@ -115,9 +122,9 @@ describe("components", () => {
             enzymeWrapper.setState(expectedState);
             enzymeWrapper.find("PrimaryButton").at(1).simulate("click");
             expect(props.applyFilter.mock.calls.length).toBe(1);
-            const { dateStart, dateEnd, customer, contractor, amountStart, amountEnd, isUsd } = enzymeWrapper.state();
-            expect(dateStart).toBe(expectedState.dateStart);
-            expect(dateEnd).toBe(expectedState.dateEnd);
+            const { dateStart, dateEnd, customer, contractor, amountStart, amountEnd, isUsd } = props.applyFilter.mock.calls[props.applyFilter.mock.calls.length - 1][0];
+            expect(dateStart.toString()).toBe(new Date(expectedState.dateStart).toString());
+            expect(dateEnd.toString()).toBe(new Date(expectedState.dateEnd).toString());
             expect(customer).toBe(expectedState.customer);
             expect(contractor).toBe(expectedState.contractor);
             expect(amountStart).toBe(expectedState.amountStart);
