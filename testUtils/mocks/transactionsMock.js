@@ -1,6 +1,6 @@
 export default [
     {
-        date: new Date(),
+        date: new Date("10 06 2016"),
         customer: "customer 1",
         contractor: "contractor 1",
         amount: 10,
@@ -10,7 +10,7 @@ export default [
         id: "1",
     },
     {
-        date: new Date(),
+        date: new Date("10 06 2014"),
         customer: "customer 2",
         contractor: "contractor 2",
         amount: 49,
@@ -20,7 +20,7 @@ export default [
         id: "2",
     },
     {
-        date: new Date(),
+        date: new Date("10 06 2013"),
         customer: "customer 3",
         contractor: "contractor 3",
         amount: 5,
@@ -30,7 +30,7 @@ export default [
         id: "3",
     },
     {
-        date: new Date(),
+        date: new Date("10 06 2017"),
         customer: "customer 4",
         contractor: "contractor 4",
         amount: 4564,
@@ -40,7 +40,7 @@ export default [
         id: "4",
     },
     {
-        date: new Date(),
+        date: new Date("10 06 2010"),
         customer: "customer 5",
         contractor: "contractor 5",
         amount: 1234,
