@@ -19,6 +19,7 @@ function setup() {
 }
 
 describe("components", () => {
+
     describe("LabelInput", () => {
 
         it("should render self", () => {
@@ -39,6 +40,7 @@ describe("components", () => {
             expect(props.onChange.mock.calls.length).toBe(1);
             expect(props.onChange.mock.calls[props.onChange.mock.calls.length - 1][0].target.value).toBe("test");
         });
+        
     });
 
 });
