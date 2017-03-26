@@ -46,9 +46,16 @@ export default class TransactionFilter extends React.Component {
         this.setState(newState);
     }
 
+    applyFilter = () => {
+        this.props.applyFilter({
+            ...this.state,
+            dateStart: new Date(this.state.dateStart),
+            dateEnd: new Date(this.state.dateEnd),
+        });
+    }
+
     render() {
         const { dateStart, dateEnd, customer, contractor, amountStart, amountEnd, isUsd } = this.state;
-        const applyFilter = this.props.applyFilter;
         return (<div className={styles.filter}>
             <h4 className={styles.header}>Фильтр</h4>
             <div>
@@ -78,8 +85,8 @@ export default class TransactionFilter extends React.Component {
                 </div>
             </div>
             <footer className={styles.footer}>
-                <SecondaryButton text="Очистить" onClick={() => this.setState(initialState, () => applyFilter(this.state))} className={styles.cancelButton + " " + styles.button} />
-                <PrimaryButton text="Применить" onClick={() => applyFilter(this.state)} className={styles.button} />
+                <SecondaryButton text="Очистить" onClick={() => this.setState(initialState, () => this.applyFilter())} className={styles.cancelButton + " " + styles.button} />
+                <PrimaryButton text="Применить" onClick={this.applyFilter} className={styles.button} />
             </footer>
         </div>);
     }

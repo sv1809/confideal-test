@@ -23,7 +23,7 @@ class Profile extends React.Component {
         sortTransactions: PropTypes.func.isRequired,
         transactions: PropTypes.arrayOf(
             PropTypes.shape({
-                date: PropTypes.string.isRequired,
+                date: PropTypes.any.isRequired,
                 customer: PropTypes.string.isRequired,
                 contractor: PropTypes.string.isRequired,
                 amount: PropTypes.number.isRequired,

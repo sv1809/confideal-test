@@ -6,10 +6,10 @@ export const filter = (filter, rate) => transaction => {
     if (filter == null) {
         return true;
     }
-    if (filter.dateStart != null && new Date(filter.dateStart) > new Date(transaction.date)) {
+    if (filter.dateStart != null && filter.dateStart > transaction.date) {
         return false;
     }
-    if (filter.dateEnd != null && new Date(filter.dateEnd) < new Date(transaction.date)) {
+    if (filter.dateEnd != null && filter.dateEnd < transaction.date) {
         return false;
     }
     if (filter.customer != null && transaction.customer.indexOf(filter.customer) === -1) {
@@ -41,7 +41,7 @@ export const filter = (filter, rate) => transaction => {
 
 export const sort = sorting => (a, b) => {
     if (sorting == null) return 0;
-    if (sorting.field === "customer" || sorting.field === "contractor") {
+    if (sorting.field === "customer" || sorting.field === "contractor" || sorting.field === "date") {
         if (sorting.direction === sortDirections.ASCENDING) {
             if (a[sorting.field] < b[sorting.field]) return -1;
             if (a[sorting.field] > b[sorting.field]) return 1;
@@ -57,19 +57,6 @@ export const sort = sorting => (a, b) => {
             return a[sorting.field] - b[sorting.field];
         } else {
             return b[sorting.field] - a[sorting.field];
-        }
-    }
-    if (sorting.field === "date") {
-        const aDate = new Date(a[sorting.field]);
-        const bDate = new Date(b[sorting.field]);
-        if (sorting.direction === sortDirections.ASCENDING) {
-            if (aDate < bDate) return -1;
-            if (aDate > bDate) return 1;
-            return 0;
-        } else {
-            if (aDate < bDate) return 1;
-            if (aDate > bDate) return -1;
-            return 0;
         }
     }
 };

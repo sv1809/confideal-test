@@ -52,6 +52,7 @@ export default class AddTransactionWindow extends React.Component {
         this.props.addTransaction({
             ...this.state,
             id: uuidV4(),
+            date: new Date(this.state.date),
         });
         this.props.onClose();
     }

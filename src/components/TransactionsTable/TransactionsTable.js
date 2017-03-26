@@ -17,7 +17,7 @@ const TransactionsTable = ({ transactions, rate, deleteTransaction }) => (<table
     </thead>
     <tbody>
         {transactions.map(item => (<tr key={item.id} >
-            <td>{item.date}</td>
+            <td>{item.date.toJSON().slice(0, 10)}</td>
             <td>{item.customer}</td>
             <td>{item.contractor}</td>
             <td>{item.amount} ETH({item.amount * rate} USD)</td>
@@ -34,7 +34,7 @@ TransactionsTable.propTypes = {
     deleteTransaction: PropTypes.func.isRequired,
     transactions: PropTypes.arrayOf(
         PropTypes.shape({
-            date: PropTypes.string.isRequired,
+            date: PropTypes.any.isRequired,
             customer: PropTypes.string.isRequired,
             contractor: PropTypes.string.isRequired,
             amount: PropTypes.number.isRequired,
